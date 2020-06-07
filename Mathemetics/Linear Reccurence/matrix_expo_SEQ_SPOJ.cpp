@@ -83,13 +83,18 @@ ll compute(int n)
             }else{
                 T[i][j] = c[k-j]; // Last row as reversed Coeficients
             }
+            cout<<T[i][j]<<"\t"  ;
+            cout<<i<<"\t\t"<<j<<"\t";
         }
+        cout<<endl;
     }  
 
     T = pow(T,n-1);
+    
 
     ll res = 0;
     for(int i = 1;i<= k;i++){
+        cout<<T[1][i]<<F1[i]<<endl;
         res= (res+ (T[1][i] * F1[i])%MOD)%MOD;
     }
     return res;

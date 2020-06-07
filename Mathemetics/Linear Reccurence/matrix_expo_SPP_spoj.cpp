@@ -1,38 +1,37 @@
-#include<bits/stdc++.h>
+
+#include <bits/stdc++.h>
 using namespace std;
+#include <vector>
 #define ll long long
-ll k;
-vector<ll>a,b,c;
-#define MOD 100000000
-vector<vector<ll>> multiply(vector<vector<ll>>A,vector<vector<ll>>B){
+ll k,MOD;
+vector<ll> a,b,c;
+vector<vector<ll>>  multiply(vector< vector<ll> > A,vector< vector<ll> > B){
+//    Local array to store the result 
     vector<vector<ll>> C(k+1,vector<ll>(k+1));
-    for(int i =1;i<=k;i++){
-        for(int j = 1;j<=k;j++){
-            C[i][j] = 0;
-            for(int x= 1;x<=k;x++){
-                C[i][j] = (C[i][j] + (A[i][x] * B[x][j])%MOD)%MOD;
+    for(int i = 1 ;i<=k;i++ ){
+        for(int j = 1 ;j<=k;j++){
+            for(int x = 1;x<=k;x++){
+                // cout<<B[i][j]<<endl;
+                C[i][j] = (C[i][j] + (A[i][x] * B[x][j])%MOD)%MOD; 
             }
         }
     }
-    return C;
-}
 
-
-
-vector<vector<ll>> pow(vector<vector<ll>>A,ll p){
- 
+   return C; 
+} 
+vector< vector<ll> > pow(vector< vector<ll> > A,ll p){
+    
     if(p == 1){
         return A;
     }
     if(p&1){
         return multiply(A,pow(A,p-1));
     }else{
-        vector<vector<ll>> X = pow(A,p/2);
-        return multiply(X,X);
+       vector<vector<ll> > X = pow(A,p/2);
+       return multiply(X,X);
     }
+
 }
-
-
 ll compute(int n)
 {
     if(n == 0){
@@ -40,13 +39,13 @@ ll compute(int n)
     }
     if(n <= k){
         return b[n-1];
-    }
+    } 
     // Otherwise compute Using Matrix Exponenation
     vector <ll> F1(k+1); //Indexing from 1
 
     for(int i = 1;i <= k ; i++){
         F1[i] = b[i-1];
-        // cout<<F1[i]<<"\t";
+
     }
   
     // Building Transformation Matrix
@@ -65,8 +64,10 @@ ll compute(int n)
             }
         }
     }  
+    
 
     T = pow(T,n-1);
+      
 
     ll res = 0;
     for(int i = 1;i<= k;i++){
@@ -76,7 +77,7 @@ ll compute(int n)
 }
 int main(int argc, char const *argv[])
 {
-    ll t,n,num;
+    ll t,n,num,m;
     cin>>t;
     while(t>0){
         cin>>k;
@@ -88,18 +89,14 @@ int main(int argc, char const *argv[])
             cin>>num;
             c.push_back(num);
         }
+        cin>>m;
         cin>>n;
-
-        cout<<compute(n)<<endl;
+        cin>>MOD; 
+        cout<<compute(n+2)-compute(m+1)<<endl;
         b.clear();
         c.clear();
         t--;
     }
     return 0;
 }
-
-
-
-
-
 
