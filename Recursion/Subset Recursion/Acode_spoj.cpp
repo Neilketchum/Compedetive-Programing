@@ -22,7 +22,6 @@ void generateAcode(char *in,char *out,int i,int j){
     }
     int currdigit = in[i] - '0';
     if(in[i+1]!='\0'){
-        
         int nextdigit = in[i+1] - '0';
         if((currdigit*10)+nextdigit < 26){
             // cout<<alpha[(currdigit*10)+nextdigit]<<endl;
