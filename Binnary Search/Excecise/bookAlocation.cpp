@@ -27,7 +27,7 @@ ll findPages(ll *arr,ll n,ll m){
     }
     ll s = 0;
     ll e = sum;
-    ll ans = ll_MAX;
+    ll ans = INT_MAX;
     while(s<=e){
         ll mid  = s  + (e - s)/2;
         if(bookRakhPaye(arr,n,m,mid)){
@@ -45,7 +45,7 @@ int main()
     //Number of pages in books 
     int n,m;
     cin>>n>>m;
-    int arr[n];
+    ll arr[n];
     for(int i =0;i<n;i++){
         cin>>arr[i];
     }

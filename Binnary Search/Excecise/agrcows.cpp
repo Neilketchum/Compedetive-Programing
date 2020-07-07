@@ -42,7 +42,7 @@ int min_distance(vector<int>stall_index,int stalls,int cows){
 int main(int argc, char const *argv[])
 {
     int t;
-cin>>t;
+    t =1;
     while(t > 0){
         int stalls ,cows;
         cin>>stalls>>cows;

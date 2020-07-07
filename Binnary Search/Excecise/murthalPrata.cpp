@@ -44,7 +44,7 @@ int minTime(int p,int cook[],int n){
 
 int main(){
     int t;
-    cin>>t;
+   t = 1;
     while(t--){
         int p;
         cin>>p;
