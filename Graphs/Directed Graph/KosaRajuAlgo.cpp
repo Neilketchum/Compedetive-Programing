@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Graph{
+    map<int,list<int>>l1;
+    map<int,list<int>>l2;
+    map<int,bool>visited1;
+    map<int,bool>visited2;
+    public:
+        void addEdge(int x,int y){
+            l1[x].push_back(y);
+            l2[y].push_back(x);
+        }
+        void kosaRaju_helper2(map<int,list<int>>l,stack<int>&s,int src,map<int,bool>&visited){
+            if(!visited[src]){
+                visited[src] = true;
+                cout<<"src"<<"\t";
+                s.pop();
+                for(auto nbr:l[src]){
+                    kosaRaju_helper2(l,s,nbr,visited);
+                }
+            }
+        }
+        void kosaRaju_helper(map<int,list<int>>l,stack<int>&s,int src,map<int,bool>&visited){
+            if(!visited[src]){
+                visited[src] = true;
+                for(auto nbr:l[src]){
+                    kosaRaju_helper(l,s,nbr,visited);
+                }
+                s.push(src);
+            }
+        }
+       
+        void dfs(int cur,vector<int>&order){
+            visited1[cur] = true;
+            for(auto nbr:l1[cur]){
+                if(!visited1[nbr]){
+                    dfs(nbr,order);
+                }
+            }
+            order.push_back(cur);
+        }
+        void kosaRaju(){
+            
+            for(auto itr:l1){
+                visited1[itr.first] = false;
+                visited2[itr.first] = false;
+            }
+            vector<int>st;
+            for(auto itr:l1){
+                if(!visited1[itr.first]){
+                    dfs(itr.first,st);
+                }
+            }
+            for(int i = st.size() -1;i>=0;i--){
+                
+            }
+
+
+        }
+
+};
+
+int main(int argc, char const *argv[])
+{
+    Graph g;
+    g.addEdge(0, 1);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(1, 3);
+    g.addEdge(3, 4);
+    g.addEdge(4, 5);
+    g.addEdge(5, 3);
+    g.addEdge(5, 6);
+    g.kosaRaju();
+    return 0;
+}
