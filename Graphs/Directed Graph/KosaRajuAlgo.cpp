@@ -10,25 +10,6 @@ class Graph{
             l1[x].push_back(y);
             l2[y].push_back(x);
         }
-        void kosaRaju_helper2(map<int,list<int>>l,stack<int>&s,int src,map<int,bool>&visited){
-            if(!visited[src]){
-                visited[src] = true;
-                cout<<"src"<<"\t";
-                s.pop();
-                for(auto nbr:l[src]){
-                    kosaRaju_helper2(l,s,nbr,visited);
-                }
-            }
-        }
-        void kosaRaju_helper(map<int,list<int>>l,stack<int>&s,int src,map<int,bool>&visited){
-            if(!visited[src]){
-                visited[src] = true;
-                for(auto nbr:l[src]){
-                    kosaRaju_helper(l,s,nbr,visited);
-                }
-                s.push(src);
-            }
-        }
        
         void dfs(int cur,vector<int>&order){
             visited1[cur] = true;
@@ -39,25 +20,37 @@ class Graph{
             }
             order.push_back(cur);
         }
+        void dfs_rev(int cur){
+            visited2[cur] = true;
+            cout<<cur<<"\t";
+            for(auto nbr:l2[cur]){
+                if(!visited2[nbr]){
+                    dfs_rev(nbr);
+                }
+            }
+        }
         void kosaRaju(){
             
             for(auto itr:l1){
                 visited1[itr.first] = false;
                 visited2[itr.first] = false;
             }
+            // First Pass
             vector<int>st;
             for(auto itr:l1){
                 if(!visited1[itr.first]){
                     dfs(itr.first,st);
                 }
             }
+            // Second Pass
             for(int i = st.size() -1;i>=0;i--){
-                
-            }
-
-
+                if(!visited2[st[i]]){
+                    cout<<"Component "<<i<<" ";
+                    dfs_rev(st[i]);
+                    cout<<endl;
+                    }
+                }
         }
-
 };
 
 int main(int argc, char const *argv[])

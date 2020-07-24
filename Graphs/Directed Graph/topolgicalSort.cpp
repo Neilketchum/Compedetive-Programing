@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 class Graph{
-    map<int,list<int>>l;
+    map<int,linist<int>>l;
     public:
         void addEdge(int x,int y){
             l[x].push_back(y);
